@@ -122,6 +122,11 @@ void GenerateRSAKeys()
 
 int main(){
 
+    string folder;
+    cout<<"Enter License No:";
+    cin>>folder;
+    fs::current_path(folder);
+    
     //Reading the JSON
     ifstream input_file("license.json");
     json loaded;
