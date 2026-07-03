@@ -4,6 +4,7 @@
 #include <sstream>
 #include <ctime>
 #include <random>
+#include<filesystem>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -47,6 +48,7 @@ namespace nlohmann{
 }
 
 struct LicenseAttrib{
+    string no;
     string macid;
     string exp;
     time_t exp_utc;
@@ -54,6 +56,8 @@ struct LicenseAttrib{
 };
 
 void readattr(LicenseAttrib &l){
+    cout<<"Enter the License No:";
+    cin>>l.no;
     cout<<"Enter the following details:\nMAC ID: ";
     cin>>l.macid;
     string exp_dt,exp_tm;
@@ -94,17 +98,11 @@ int main(){
     
     json j_lic;
     to_json(j_lic,l1); 
+    fs::create_directory(l1.no);
 
-    
-
-
-    // string expiry=j_lic["EXPIRY_DATE"]+" "+j_lic["EXPIRY_TIME"];
-    // cout<<"\n"<<expiry;
-
-    ofstream output_file("license.json");
+    ofstream output_file(l1.no+"/license.json");
     output_file<<j_lic.dump(4);
     output_file.close();
-
 
     return 0;
 }
