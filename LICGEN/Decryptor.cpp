@@ -72,6 +72,10 @@ void timeLeft(time_t expiry, time_t now){
 }
 
 int main(){
+    string folder;
+    cout<<"Enter License No:";
+    cin>>folder;
+    fs::current_path(folder);
 
     ifstream input_file("license.json");
     json loaded;
